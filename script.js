@@ -1,13 +1,14 @@
 window.onload = () => {
   getCountryData();
   getHistoricalData();
+  myChart();
 };
 
 var map;
 var infoWindow;
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: 39.8283, lng: -98.5795 },
+    center: { lat: 53.345, lng: 23.065 },
     zoom: 3,
     styles: mapStyle,
   });
@@ -169,3 +170,77 @@ const showDataInTable = (data) => {
   });
   document.getElementById("table-data").innerHTML = html;
 };
+
+// var myPieChart = new Chart(ctx, {
+//   type: 'pie',
+//   data: data,
+//   options: options
+// });
+
+// new Chart(document.getElementById("pie-chart"), {
+//   type: "pie",
+//   data: {
+//     labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+//     datasets: [
+//       {
+//         label: "Population (millions)",
+//         backgroundColor: [
+//           "#3e95cd",
+//           "#8e5ea2",
+//           "#3cba9f",
+//           "#e8c3b9",
+//           "#c45850",
+//         ],
+//         data: [2478, 5267, 734, 784, 433],
+//       },
+//     ],
+//   },
+//   options: {
+//     title: {
+//       display: true,
+//       text: "Predicted world population (millions) in 2050",
+//     },
+//   },
+// });
+
+// let myChart = document.getElementById("pie-chart").getContext("2d");
+
+// let myChart = new Chart(ctx, {
+//   type: "pie",
+//   data: {
+//     datasets: [
+//       {
+//         data: [30, 10, 40, 20],
+//         backgroundColor: colorHex,
+//       },
+//     ],
+//     labels: labels,
+//   },
+//   options: {
+//     responsive: true,
+//     legend: {
+//       position: "bottom",
+//     },
+//     plugins: {
+//       datalabels: {
+//         color: "#fff",
+//         anchor: "end",
+//         align: "start",
+//         offset: -10,
+//         borderWidth: 2,
+//         borderColor: "#fff",
+//         borderRadius: 25,
+//         backgroundColor: (context) => {
+//           return context.dataset.backgroundColor;
+//         },
+//         font: {
+//           weight: "bold",
+//           size: "10",
+//         },
+//         formatter: (value) => {
+//           return value + " %";
+//         },
+//       },
+//     },
+//   },
+// });

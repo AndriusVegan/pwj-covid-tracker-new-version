@@ -1,0 +1,60 @@
+.main {
+  /* background-color: red; */
+  height: 100vh;
+}
+.row {
+  background-color: green;
+  /* height: 50vh; */
+}
+.search-container {
+  display: flex;
+  align-items: center;
+}
+.map-container {
+  height: 500px;
+  /* background-color: orchid; */
+  border: 1px solid ba;
+}
+#map {
+  border-radius: 12px;
+  overflow: hidden;
+  /* width: 100vw; */
+}
+
+.chart-container .col {
+  background-color: #eff2f6;
+  border-radius: 12px;
+}
+.chart-container {
+  height: 300px;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.col {
+  border-radius: 12px;
+}
+
+.linear-chart {
+  height: 100%;
+}
+
+.title-container h1 {
+  color: red;
+  margin-bottom: 0;
+}
+.title-container h4 {
+  text-transform: uppercase;
+  color: #cacbcf;
+}
+.search-container .card {
+  background-color: #eff2f6;
+  border-radius: 12px;
+}
+.search-container .card-body {
+  padding: 1rem;
+}
+.stats-container .card {
+  background-color: #eff2f6;
+  border-radius: 12px;
+}

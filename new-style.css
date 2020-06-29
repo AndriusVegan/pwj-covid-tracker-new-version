@@ -69,3 +69,10 @@
   height: 100%;
   width: 100%;
 }
+
+.side-panel-container{
+  border-bottom-left-radius: 12px;
+  background-color: #eff2f6;
+  min-height: 400px;
+  border: 1px solid black;
+}

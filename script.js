@@ -1,11 +1,17 @@
 window.onload = () => {
   getCountryData();
   getHistoricalData();
-  myChart();
+  getWorldCoronaData();
+  
+  document.querySelector('.active-cases-card').addEventListener('click', () =>{
+      console.log("yo we clicked")
+  })
 };
 
 var map;
 var infoWindow;
+let coronaGlobalData;
+let mapCircles = [];
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: 53.345, lng: 23.065 },
@@ -14,20 +20,33 @@ function initMap() {
   });
   infoWindow = new google.maps.InfoWindow();
 }
+const changeDataSelection = (casesType) => {
+  clearTheMap();
+  showDataOnMap(coronaGlobalData, casesType);
+
+}
+
+const clearTheMap = () => {
+  for(let circle of mapCircles) {
+    circle.setMap(null);
+  }
+
+}
 
 const getCountryData = () => {
-  fetch("https://corona.lmao.ninja/v2/countries")
+  fetch("https://disease.sh/v2/countries")
     .then((response) => {
       return response.json();
     })
     .then((data) => {
+      coronaGlobalData = data;
       showDataOnMap(data);
       showDataInTable(data);
     });
 };
 
 const getHistoricalData = () => {
-  fetch("https://corona.lmao.ninja/v2/historical/all?lastdays=120")
+  fetch("https://disease.sh/v2/historical/all?lastdays=120")
     .then((response) => {
       return response.json();
     })
@@ -37,75 +56,24 @@ const getHistoricalData = () => {
     });
 };
 
-const buildChartData = (data) => {
-  let chartData = [];
-  for (let date in data.cases) {
-    let newDataPoint = {
-      x: date,
-      y: data.cases[date],
-    };
-    chartData.push(newDataPoint);
-  }
-  return chartData;
-};
+const getWorldCoronaData = () => {
+  fetch("https://disease.sh/v2/all")
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      // let chartData = buildChartData(data);
+      buildChart(data);
+    });
 
-const buildChart = (chartData) => {
-  console.log("All if good");
-  var timeFormat = "MM/DD/YY";
-  var ctx = document.getElementById("myChart").getContext("2d");
-  var chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: "line",
-
-    // The data for our dataset
-    data: {
-      datasets: [
-        {
-          label: "Total Cases",
-          backgroundColor: "#1d2c4d",
-          borderColor: "#1d2c4d",
-          data: chartData,
-        },
-      ],
-    },
-
-    // Configuration options go here
-    options: {
-      maintainAspectRatio: false,
-      tooltips: {
-        mode: "index",
-        intersect: false,
-      },
-      scales: {
-        xAxes: [
-          {
-            type: "time",
-            time: {
-              format: timeFormat,
-              tooltipFormat: "ll",
-            },
-          },
-        ],
-        yAxes: [
-          {
-            ticks: {
-              // Include a dollar sign in the ticks
-              callback: function (value, index, values) {
-                return numeral(value).format("0,0");
-              },
-            },
-          },
-        ],
-      },
-    },
-  });
-};
+}
 
 const openInfoWindow = () => {
   infoWindow.open(map);
 };
 
-const showDataOnMap = (data) => {
+const showDataOnMap = (data, casesType="cases") => {
+  //="cases" sets default parameters 
   data.map((country) => {
     let countryCenter = {
       lat: country.countryInfo.lat,
@@ -120,8 +88,10 @@ const showDataOnMap = (data) => {
       fillOpacity: 0.35,
       map: map,
       center: countryCenter,
-      radius: country.cases,
+      radius: country[casesType]
     });
+
+    mapCircles.push(countryCircle);
 
     var html = `
           <div class="info-container">
@@ -170,77 +140,3 @@ const showDataInTable = (data) => {
   });
   document.getElementById("table-data").innerHTML = html;
 };
-
-// var myPieChart = new Chart(ctx, {
-//   type: 'pie',
-//   data: data,
-//   options: options
-// });
-
-// new Chart(document.getElementById("pie-chart"), {
-//   type: "pie",
-//   data: {
-//     labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
-//     datasets: [
-//       {
-//         label: "Population (millions)",
-//         backgroundColor: [
-//           "#3e95cd",
-//           "#8e5ea2",
-//           "#3cba9f",
-//           "#e8c3b9",
-//           "#c45850",
-//         ],
-//         data: [2478, 5267, 734, 784, 433],
-//       },
-//     ],
-//   },
-//   options: {
-//     title: {
-//       display: true,
-//       text: "Predicted world population (millions) in 2050",
-//     },
-//   },
-// });
-
-// let myChart = document.getElementById("pie-chart").getContext("2d");
-
-// let myChart = new Chart(ctx, {
-//   type: "pie",
-//   data: {
-//     datasets: [
-//       {
-//         data: [30, 10, 40, 20],
-//         backgroundColor: colorHex,
-//       },
-//     ],
-//     labels: labels,
-//   },
-//   options: {
-//     responsive: true,
-//     legend: {
-//       position: "bottom",
-//     },
-//     plugins: {
-//       datalabels: {
-//         color: "#fff",
-//         anchor: "end",
-//         align: "start",
-//         offset: -10,
-//         borderWidth: 2,
-//         borderColor: "#fff",
-//         borderRadius: 25,
-//         backgroundColor: (context) => {
-//           return context.dataset.backgroundColor;
-//         },
-//         font: {
-//           weight: "bold",
-//           size: "10",
-//         },
-//         formatter: (value) => {
-//           return value + " %";
-//         },
-//       },
-//     },
-//   },
-// });

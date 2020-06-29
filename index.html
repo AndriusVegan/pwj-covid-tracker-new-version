@@ -15,6 +15,8 @@
   <script type='text/javascript' src="JS/script.js"></script> -->
   <script src="map-style.js"></script>
   <script src="script.js"></script>
+  <script src="charts.js"></script>
+
   <script src="https://kit.fontawesome.com/c939d0e917.js"></script>
 </head>
 
@@ -38,7 +40,7 @@
         </div>
         <div class="row stats-container">
           <div class="col">
-            <div class="card">
+            <div class="card total-cases-card" onclick="changeDataSelection('total')">
               <div class="card-body">
                 <h5 class="card-title">Total cases</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Stats number</h6>
@@ -46,7 +48,7 @@
             </div>
           </div>
           <div class="col">
-            <div class="card">
+            <div class="card active-cases-card" onclick="changeDataSelection('active')">
               <div class="card-body">
                 <h5 class="card-title">Active cases</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Stats number</h6>
@@ -54,7 +56,7 @@
             </div>
           </div>
           <div class="col">
-            <div class="card">
+            <div class="card recovered-cases-card" onclick="changeDataSelection('recovered')">
               <div class="card-body">
                 <h5 class="card-title">Recovered</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Stats number</h6>
@@ -62,7 +64,7 @@
             </div>
           </div>
           <div class="col">
-            <div class="card">
+            <div class="card deaths-cases-card" onclick="changeDataSelection('deaths')">
               <div class="card-body">
                 <h5 class="card-title">Deaths</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Stats number</h6>
@@ -71,21 +73,22 @@
           </div>
         </div>
         <div class="row map-container mt-3">
-          <div class="col">
+          <div class="col p-3 ">
             <div id="map"></div>
           </div>
         </div>
         <div class="row chart-container mt-3">
-          <div class="col linear-chart mr-3">
+          <div class="col linear-chart mr-3 p-3">
             <canvas id="myChart"></canvas>
           </div>
-          <div class="col pie-chart-container mr-3">
-            <canvas id="pie-chart"></canvas>
+          <div class="col pie-chart-container p-3 mr-3">
+            <canvas id="myPieChart"></canvas>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-4">
+    <div class="col-4 side-panel-container my-3">
+
     </div>
   </div>
   </div>

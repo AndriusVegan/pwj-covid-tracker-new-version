@@ -2,16 +2,22 @@ window.onload = () => {
   getCountryData();
   getHistoricalData();
   getWorldCoronaData();
-  
-  document.querySelector('.active-cases-card').addEventListener('click', () =>{
-      console.log("yo we clicked")
-  })
+
+  document.querySelector(".active-cases-card").addEventListener("click", () => {
+    console.log("yo we clicked");
+  });
 };
 
 var map;
 var infoWindow;
 let coronaGlobalData;
 let mapCircles = [];
+var casesTypeColor = {
+  cases: "#1d2c4d",
+  active: "#9d80fe",
+  recovered: "#7dd71d",
+  deaths: "#fb4443",
+};
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: 53.345, lng: 23.065 },
@@ -23,15 +29,13 @@ function initMap() {
 const changeDataSelection = (casesType) => {
   clearTheMap();
   showDataOnMap(coronaGlobalData, casesType);
-
-}
+};
 
 const clearTheMap = () => {
-  for(let circle of mapCircles) {
+  for (let circle of mapCircles) {
     circle.setMap(null);
   }
-
-}
+};
 
 const getCountryData = () => {
   fetch("https://disease.sh/v2/countries")
@@ -65,15 +69,17 @@ const getWorldCoronaData = () => {
       // let chartData = buildChartData(data);
       buildChart(data);
     });
-
-}
+};
 
 const openInfoWindow = () => {
   infoWindow.open(map);
 };
 
-const showDataOnMap = (data, casesType="cases") => {
-  //="cases" sets default parameters 
+const showDataOnMap = (data, casesType = "cases") => {
+  //="cases" sets default parameters, same as below
+  // if (!casesType) {
+  //   casesType = "cases";
+  // }
   data.map((country) => {
     let countryCenter = {
       lat: country.countryInfo.lat,
@@ -81,14 +87,14 @@ const showDataOnMap = (data, casesType="cases") => {
     };
 
     var countryCircle = new google.maps.Circle({
-      strokeColor: "#FF0000",
+      strokeColor: casesTypeColor[casesType],
       strokeOpacity: 0.8,
       strokeWeight: 2,
-      fillColor: "#FF0000",
+      fillColor: casesTypeColor[casesType],
       fillOpacity: 0.35,
       map: map,
       center: countryCenter,
-      radius: country[casesType]
+      radius: country[casesType],
     });
 
     mapCircles.push(countryCircle);

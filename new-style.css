@@ -1,9 +1,12 @@
-.main {
-  /* background-color: red; */
+
+.container-fluid {
+  background-image: url('corona1.jpg')
   height: 100vh;
+  min-width: 400px;
 }
 .row {
-  background-color: green;
+  /* background-color: green; */
+  background-color: blueviolet;
   /* height: 50vh; */
 }
 .search-container {
@@ -37,6 +40,9 @@
 
 .linear-chart {
   height: 100%;
+}
+.title-container{
+  /* background-image: url('corona1.jpg') */
 }
 
 .title-container h1 {
@@ -74,6 +80,10 @@
   background-color: #EFF2F6;
   border-bottom-left-radius: 12px;
   border-top-left-radius: 12px;
+  overflow-y: scroll;
+  max-height: 100vh;
+  background-color: blueviolet;
+  
  }
 .total-number {
   color: #1d2c4d;
@@ -86,4 +96,18 @@
 }
 .death-number {
   color: #fb4443;
+}
+.card:hover{
+  background-color: #898d78 ;
+  cursor: pointer;
+}
+.table{
+  width: 100%;
+  border-radius: 12px;
+  border-spacing: 0px;
+   
+}
+.country-data{
+  width: 100%
+  border-spacing: 0px; 
 }

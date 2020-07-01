@@ -1,6 +1,6 @@
 
 .container-fluid {
-  background-image: url('corona1.jpg')
+  background-image: url('corona1.jpg');
   height: 100vh;
   min-width: 400px;
 }
@@ -40,9 +40,6 @@
 
 .linear-chart {
   height: 100%;
-}
-.title-container{
-  /* background-image: url('corona1.jpg') */
 }
 
 .title-container h1 {
@@ -108,6 +105,6 @@
    
 }
 .country-data{
-  width: 100%
+  width: 100%;
   border-spacing: 0px; 
 }

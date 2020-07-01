@@ -71,11 +71,10 @@
 }
 
 .side-panel-container {
+  background-color: #EFF2F6;
   border-bottom-left-radius: 12px;
-  background-color: #eff2f6;
-  min-height: 400px;
-  border: 1px solid black;
-}
+  border-top-left-radius: 12px;
+ }
 .total-number {
   color: #1d2c4d;
 }

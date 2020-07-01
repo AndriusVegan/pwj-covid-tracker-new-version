@@ -3,10 +3,11 @@ window.onload = () => {
   getHistoricalData();
   getWorldCoronaData();
 
-  document.querySelector(".active-cases-card").addEventListener("click", () => {
-    console.log("yo we clicked");
-  });
-};
+  // document.querySelector(".active-cases-card").addEventListener("click", () => {
+  //   console.log("yo we clicked");
+  // }); 
+  // use Html inlin onclick instrad
+}
 
 var map;
 var infoWindow;
@@ -40,7 +41,7 @@ const clearTheMap = () => {
 const getCountryData = () => {
   fetch("https://disease.sh/v2/countries")
     .then((response) => {
-      return response.json();
+      return response.json()
     })
     .then((data) => {
       coronaGlobalData = data;
@@ -49,6 +50,16 @@ const getCountryData = () => {
     });
 };
 
+const getWorldCoronaData = () => {
+  fetch("https://disease.sh/v2/all")
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      // let chartData = buildChartData(data);
+      buildPieChart(data);
+    });
+};
 const getHistoricalData = () => {
   fetch("https://disease.sh/v2/historical/all?lastdays=120")
     .then((response) => {
@@ -60,16 +71,7 @@ const getHistoricalData = () => {
     });
 };
 
-const getWorldCoronaData = () => {
-  fetch("https://disease.sh/v2/all")
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      // let chartData = buildChartData(data);
-      buildChart(data);
-    });
-};
+
 
 const openInfoWindow = () => {
   infoWindow.open(map);

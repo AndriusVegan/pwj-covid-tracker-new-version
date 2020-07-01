@@ -13,10 +13,10 @@ const buildChartData = (data) => {
   const buildChart = (chartData) => {
     console.log("All if good");
     var timeFormat = "MM/DD/YY";
-    var ctx = document.getElementById("myPieChart").getContext("2d");
+    var ctx = document.getElementById("myChart").getContext("2d");
     var chart = new Chart(ctx, {
       // The type of chart we want to create
-      type: "pie",
+      type: "line",
   
       // The data for our dataset
       data: {

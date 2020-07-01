@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,14 +10,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-  <!-- <script type='text/javascript' src="JS/map-style.js"></script>
-  <script type='text/javascript' src="JS/script.js"></script> -->
+  <script src="https://kit.fontawesome.com/c939d0e917.js"></script>
   <script src="map-style.js"></script>
   <script src="script.js"></script>
   <script src="charts.js"></script>
-  <script src="https://kit.fontawesome.com/c939d0e917.js"></script>
 </head>
-
 <body>
   <div class="container-fluid main">
     <div class="row">
@@ -76,20 +72,19 @@
             <div id="map"></div>
           </div>
         </div>
-        <div class="row chart-container mt-3">
+        <div class="row chart-container mt-3 py-3">
           <div class="col linear-chart mr-3 p-3">
             <canvas id="myChart"></canvas>
           </div>
-          <div class="col pie-chart-container p-3 mr-3">
+          <div class="col pie-chart-container p-3">
             <canvas id="myPieChart"></canvas>
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-4 side-panel-container my-3">
+      <div class="col-4 side-panel-container my-3">
     </div>
   </div>
-  </div>
+</div>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDv7yxdmRtvnN7DhA0dVKr1-qugIwGuaQA&callback=initMap" async defer></script>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

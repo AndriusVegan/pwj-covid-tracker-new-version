@@ -80,7 +80,8 @@
   border-bottom-left-radius: 12px;
   border-top-left-radius: 12px;
   overflow-y: scroll;
-  max-height: 100vh;
+  min-height: 100vh;
+  max-height: 1000px;
   background-color: blueviolet;
   background-color: antiquewhite;
   background-color: #E1E4ED;

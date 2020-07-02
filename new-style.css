@@ -1,12 +1,14 @@
 
 .container-fluid {
   background-image: url('corona1.jpg');
-  height: 100vh;
+  height: 100%;
   min-width: 400px;
 }
 .row {
   /* background-color: green; */
   background-color: blueviolet;
+  background-color: antiquewhite;
+  background-color: #E1E4ED;
   /* height: 50vh; */
 }
 .search-container {
@@ -80,6 +82,8 @@
   overflow-y: scroll;
   max-height: 100vh;
   background-color: blueviolet;
+  background-color: antiquewhite;
+  background-color: #E1E4ED;
   
  }
 .total-number {
@@ -107,4 +111,13 @@
 .country-data{
   width: 100%;
   border-spacing: 0px; 
+  
+}
+
+.info-flag {
+  height: 80px;
+  width: 100%;
+  background-size: cover;
+  border-radius: 8px;
+  margin-bottom: 5px;
 }

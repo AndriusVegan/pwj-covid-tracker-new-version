@@ -50,7 +50,8 @@
 }
 .title-container h4 {
   text-transform: uppercase;
-  color: #cacbcf;
+  /* color: #cacbcf; */
+  color: #111111
 }
 .search-container .card {
   background-color: #eff2f6;
@@ -121,4 +122,8 @@
   background-size: cover;
   border-radius: 8px;
   margin-bottom: 5px;
+}
+.table-flag{
+ min-height:10px;
+ min-width: 80%;
 }

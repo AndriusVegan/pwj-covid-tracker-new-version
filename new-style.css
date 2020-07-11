@@ -1,4 +1,7 @@
 
+body{
+  background-color: #F5F6FA;  ;
+}
 .container-fluid {
   background-image: url('corona1.jpg');
   height: 100%;
@@ -10,6 +13,10 @@
   background-color: antiquewhite;
   background-color: #E1E4ED;
   /* height: 50vh; */
+}
+.header-container{
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 .search-container {
   display: flex;
@@ -34,6 +41,7 @@
   height: 300px;
   margin-left: 0;
   margin-right: 0;
+  float: none;
 }
 
 .col {
@@ -42,11 +50,14 @@
 
 .linear-chart {
   height: 100%;
+  width: 100%;
+  display: inline-block;
 }
 
-.title-container h1 {
+.title-container h2 {
   color: red;
   margin-bottom: 0;
+
 }
 .title-container h4 {
   text-transform: uppercase;
@@ -63,12 +74,26 @@
 .stats-container .card {
   background-color: #eff2f6;
   border-radius: 12px;
+  box-shadow: 0 0 8px -4px rgba(0 0 0 0.5);
 }
 
+.stats-container .card-title {
+  color: #695d5c;
+  font-weight: 400;
+}
+
+.stats-container .total{
+  font-size: 0.8rem;
+}
+.stats-container .card-subtitle{
+  font-weight: 600;
+}
 .pie-chart-container {
   background-color: blueviolet;
   height: 100%;
   width: 50%;
+  /* display: inline-block; */
+  /* clear:both; */
 }
 #pie-chart {
   background-color: burlywood;
@@ -78,24 +103,24 @@
 
 .side-panel-container {
   background-color: #EFF2F6;
-  border-bottom-left-radius: 12px;
-  border-top-left-radius: 12px;
-  overflow-y: scroll;
+  border-bottom-left-radius: 30px;
+  border-top-left-radius: 30px;
+  /* overflow-y: scroll;
   min-height: 100vh;
-  max-height: 1000px;
-  background-color: blueviolet;
-  background-color: antiquewhite;
+  max-height: 1000px; */
   background-color: #E1E4ED;
+  box-shadow: 0 0 8px -4px rgba(0 0 0 0.5);
+  padding-top: 15px;
   
  }
 .total-number {
-  color: #1d2c4d;
+  color: #cc1034;
 }
 .active-number {
   color: #9d80fe;
 }
 .recovered-number {
-  color: #7dd71d;
+  color: #7fd922;
 }
 .death-number {
   color: #fb4443;
@@ -113,6 +138,10 @@
 .country-data{
   width: 100%;
   border-spacing: 0px; 
+  margin-top: 20px;
+  /* border-radius: 10px; */
+  overflow: scroll;
+  height: 400px;
   
 }
 
@@ -126,4 +155,19 @@
 .table-flag{
  min-height:10px;
  min-width: 80%;
+}
+
+.country-data .table td{
+  padding: 0.5rem;
+
+} 
+.chart-container{
+  width: 100%;
+}
+
+.case-table-container h4, .chart-container h4{
+  color: #6a5d5d;
+  font-weight: 400;
+  text-align: center;
+
 }

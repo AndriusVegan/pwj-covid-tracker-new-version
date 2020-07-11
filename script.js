@@ -55,11 +55,30 @@ const getWorldCoronaData = () => {
     .then((response) => {
       return response.json();
     })
-    .then((data) => {
+    .then((data)=>{
       // let chartData = buildChartData(data);
       buildPieChart(data);
+      //if you dont use pie chart need to comment out as it would not go to next
+      setStatsData(data);
     });
 };
+
+const setStatsData = (data) => {
+  let addedCases = numeral(data.todayCases).format('+00');
+  let addedRecovered = numeral(data.todayRecovered).format('+00');
+  let addedDeaths = numeral(data.todayDeaths).format('+00');
+  let totalCases = numeral(data.cases).format('0.0a');
+  let totalRecovered = numeral(data.recovered).format('0.0a');
+  let totalDeaths = numeral(data.deaths).format('0.0a');
+
+  document.querySelector('.total-number').innerHTML=addedCases;
+  document.querySelector('.recovered-number').innerHTML=addedRecovered;
+  document.querySelector('.deaths-number').innerHTML=addedDeaths;
+  document.querySelector('.cases-total').innerHTML=`${totalCases} Total`;
+  document.querySelector('.recovered-total').innerHTML=`${totalRecovered} Total`;
+  document.querySelector('.deaths-total').innerHTML=`${totalDeaths} Total`;
+}
+
 const getHistoricalData = () => {
   fetch("https://disease.sh/v2/historical/all?lastdays=120")
     .then((response) => {
@@ -70,8 +89,6 @@ const getHistoricalData = () => {
       buildChart(chartData);
     });
 };
-
-
 
 const openInfoWindow = () => {
   infoWindow.open(map);
@@ -140,9 +157,9 @@ const showDataInTable = (data) => {
     html += `
       <tr>
           <td>${country.country}</td>
-          <td>${country.cases}</td>
-          <td>${country.recovered}</td>
-          <td>${country.deaths}</td>
+          <td>${numeral(country.cases).format('0,0')}</td>
+          <td>${numeral(country.recovered).format('0.0')}</td>
+          <td>${numeral(country.deaths).format('0.0a')}</td>
       </tr>
       `;
   });

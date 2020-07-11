@@ -181,9 +181,38 @@ tr:hover {
 thead{
   position: sticky;
 } */
+.card{
+  overflow: hidden;
+}
+
+.tab-selection{
+  height: 10px;
+  
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.card::active {
+  border-top-color: red;
+  border-top-width: 7px;
+  border-radius: 12px;
+}
+
+.cases .tab-selection{
+  background-color: #cc1034;
+}
+.recovered .tab-selection{
+  background-color: #7fd97f;
+}
+.deaths .tab-selection{
+  background-color: #red;
+}
 
 @media screen and (max-width: 1280px) {
   #main-row {
       flex-direction: column;
   }
 }
+

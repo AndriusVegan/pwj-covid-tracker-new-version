@@ -1,7 +1,10 @@
 window.onload = () => {
-  getCountryData();
+  getCountriesData();
   getHistoricalData();
   getWorldCoronaData();
+  // $('.ui.dropdown').dropdown()
+;
+
 
   // document.querySelector(".active-cases-card").addEventListener("click", () => {
   //   console.log("yo we clicked");
@@ -13,12 +16,20 @@ var map;
 var infoWindow;
 let coronaGlobalData;
 let mapCircles = [];
+const worldwideSelection = {
+  name: 'Worldwide',
+  vale: 'wwww'
+}
 var casesTypeColor = {
   cases: "#1d2c4d",
   active: "#9d80fe",
   recovered: "#7dd71d",
   deaths: "#fb4443",
 };
+const mapCenter = {
+  lat: 34.80746,
+  lng: -40.4796
+}
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: 53.345, lng: 23.065 },
@@ -38,7 +49,42 @@ const clearTheMap = () => {
   }
 };
 
-const getCountryData = () => {
+const setMapCenter = (lat, long, zoom) => {
+  map.setZoom(zoom);
+  map.panTo({
+    lat: lng,
+    lng: long
+  })
+}
+
+
+const initDropdown = () => {
+  $('.ui.dropdown').dropdown({
+    values: searchList,
+    onChange: function (value, text) {
+      if(value !== worldwideSelection.value){
+        getCountryData(value);
+      } else {
+        getWorldCoronaData();
+      }
+
+    }
+  });
+}
+
+const setSearchList = (data) => {
+  let searchList = [];
+  searchList.push(worldwideSelection);
+  data.forEach((countryData) => {
+    searchList.push({
+      name: countryData.country,
+      value: countryInfo.iso3
+    })
+  })
+  initDropdown();
+}
+
+const getCountriesData = () => {
   fetch("https://disease.sh/v2/countries")
     .then((response) => {
       return response.json()
@@ -47,7 +93,20 @@ const getCountryData = () => {
       coronaGlobalData = data;
       showDataOnMap(data);
       showDataInTable(data);
+      setSearchList();
     });
+};
+
+const getCountryData = (countryIso) =>{
+  const url = "https://disease.sh.v3/covid-19/country" +countryInfo;
+  .then((response) => {
+    return response.json()
+  })
+  .then((data) => {(
+    setMapCenter(mapCenter.lat, mapCenter.lng, 3)
+  )
+    // setMapCenter
+    // coronaGlobalData = data;
 };
 
 const getWorldCoronaData = () => {
@@ -167,37 +226,37 @@ const showDataInTable = (data) => {
   document.getElementById("table-data").innerHTML = html;
 };
 
-const sortTable = () => {
-  var table, rows, switching, i, x, y, shouldSwitch;
-  table = document.getElementById("table-data");
-  switching = true;
-  /* Make a loop that will continue until
-  no switching has been done: */
-  while (switching) {
-    // Start by saying: no switching is done:
-    switching = false;
-    rows = table.rows;
-    /* Loop through all table rows (except the
-    first, which contains table headers): */
-    for (i = 1; i < (rows.length - 1); i++) {
-      // Start by saying there should be no switching:
-      shouldSwitch = false;
-      /* Get the two elements you want to compare,
-      one from current row and one from the next: */
-      x = rows[i].getElementsByTagName("TD")[0];
-      y = rows[i + 1].getElementsByTagName("TD")[0];
-      // Check if the two rows should switch place:
-      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-        // If so, mark as a switch and break the loop:
-        shouldSwitch = true;
-        break;
-      }
-    }
-    if (shouldSwitch) {
-      /* If a switch has been marked, make the switch
-      and mark that a switch has been done: */
-      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-      switching = true;
-    }
-  }
-}
+// const sortTable = () => {
+//   var table, rows, switching, i, x, y, shouldSwitch;
+//   table = document.getElementById("table-data");
+//   switching = true;
+//   /* Make a loop that will continue until
+//   no switching has been done: */
+//   while (switching) {
+//     // Start by saying: no switching is done:
+//     switching = false;
+//     rows = table.rows;
+//     /* Loop through all table rows (except the
+//     first, which contains table headers): */
+//     for (i = 1; i < (rows.length - 1); i++) {
+//       // Start by saying there should be no switching:
+//       shouldSwitch = false;
+//       /* Get the two elements you want to compare,
+//       one from current row and one from the next: */
+//       x = rows[i].getElementsByTagName("TD")[0];
+//       y = rows[i + 1].getElementsByTagName("TD")[0];
+//       // Check if the two rows should switch place:
+//       if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+//         // If so, mark as a switch and break the loop:
+//         shouldSwitch = true;
+//         break;
+//       }
+//     }
+//     if (shouldSwitch) {
+//       /* If a switch has been marked, make the switch
+//       and mark that a switch has been done: */
+//       rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+//       switching = true;
+//     }
+//   }
+// }

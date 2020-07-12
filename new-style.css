@@ -2,17 +2,15 @@
 body{
   background-color: #F5F6FA;  ;
 }
+
 .container-fluid {
   background-image: url('corona1.jpg');
   height: 100%;
   min-width: 400px;
 }
 .row {
-  /* background-color: green; */
-  background-color: blueviolet;
   background-color: antiquewhite;
   background-color: #E1E4ED;
-  /* height: 50vh; */
 }
 .header-container{
   padding-top: 20px;
@@ -38,10 +36,9 @@ body{
   border-radius: 12px;
 }
 .chart-container {
-  height: 300px;
+  /* height: 300px; */
   margin-left: 0;
   margin-right: 0;
-  float: none;
 }
 
 .col {
@@ -67,6 +64,8 @@ body{
 .search-container .card {
   background-color: #eff2f6;
   border-radius: 12px;
+  box-shadow: 0 0 8px -4px rgba(0,0,0, 0.5);
+  overflow: hidden;
 }
 .search-container .card-body {
   padding: 1rem;
@@ -89,7 +88,6 @@ body{
   font-weight: 600;
 }
 .pie-chart-container {
-  background-color: blueviolet;
   height: 100%;
   width: 50%;
   /* display: inline-block; */
@@ -102,7 +100,6 @@ body{
 }
 
 .side-panel-container {
-  background-color: #EFF2F6;
   border-bottom-left-radius: 30px;
   border-top-left-radius: 30px;
   /* overflow-y: scroll;
@@ -123,10 +120,10 @@ body{
   color: #7fd922;
 }
 .death-number {
-  color: #fb4443;
+  color: #b95a5a;
 }
 .card:hover{
-  background-color: #898d78 ;
+  background-color: #caccc3 ;
   cursor: pointer;
 }
 .table{
@@ -187,28 +184,29 @@ thead{
 
 .tab-selection{
   height: 10px;
-  
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
 }
-
-.card::active {
-  border-top-color: red;
-  border-top-width: 7px;
-  border-radius: 12px;
-}
-
 .cases .tab-selection{
   background-color: #cc1034;
 }
 .recovered .tab-selection{
-  background-color: #7fd97f;
+  background-color: #7fd922;
 }
 .deaths .tab-selection{
-  background-color: #red;
+  background-color: red;
 }
+
+/* .card::active {
+  border-top-color: red;
+  border-top-width: 7px;
+  border-radius: 12px;
+} */
+
+
+
 
 @media screen and (max-width: 1280px) {
   #main-row {

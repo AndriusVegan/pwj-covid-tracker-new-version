@@ -2,8 +2,7 @@ window.onload = () => {
   getCountriesData();
   getHistoricalData();
   getWorldCoronaData();
-  // $('.ui.dropdown').dropdown()
-;
+  // $('.ui.dropdown').dropdown();
 
 
   // document.querySelector(".active-cases-card").addEventListener("click", () => {
@@ -18,7 +17,8 @@ let coronaGlobalData;
 let mapCircles = [];
 const worldwideSelection = {
   name: 'Worldwide',
-  vale: 'wwww'
+  value: 'www',
+  selected: true
 }
 var casesTypeColor = {
   cases: "#1d2c4d",
@@ -32,12 +32,13 @@ const mapCenter = {
 }
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: 53.345, lng: 23.065 },
+    center: mapCenter,
     zoom: 3,
     styles: mapStyle,
   });
   infoWindow = new google.maps.InfoWindow();
 }
+
 const changeDataSelection = (casesType) => {
   clearTheMap();
   showDataOnMap(coronaGlobalData, casesType);
@@ -52,22 +53,21 @@ const clearTheMap = () => {
 const setMapCenter = (lat, long, zoom) => {
   map.setZoom(zoom);
   map.panTo({
-    lat: lng,
+    lat: lat,
     lng: long
   })
 }
 
 
-const initDropdown = () => {
+const initDropdown = (searchList) => {
   $('.ui.dropdown').dropdown({
     values: searchList,
-    onChange: function (value, text) {
+    onChange: function(value, text) {
       if(value !== worldwideSelection.value){
         getCountryData(value);
       } else {
         getWorldCoronaData();
       }
-
     }
   });
 }
@@ -78,10 +78,10 @@ const setSearchList = (data) => {
   data.forEach((countryData) => {
     searchList.push({
       name: countryData.country,
-      value: countryInfo.iso3
+      value: countryData.countryInfo.iso3
     })
   })
-  initDropdown();
+  initDropdown(searchList);
 }
 
 const getCountriesData = () => {
@@ -91,23 +91,23 @@ const getCountriesData = () => {
     })
     .then((data) => {
       coronaGlobalData = data;
+      setSearchList(data);
       showDataOnMap(data);
       showDataInTable(data);
-      setSearchList();
     });
 };
 
 const getCountryData = (countryIso) =>{
-  const url = "https://disease.sh.v3/covid-19/country" +countryInfo;
+  const url = "https://disease.sh/v3/covid-19/countries/" + countryIso;
+  fetch(url)
   .then((response) => {
     return response.json()
   })
-  .then((data) => {(
-    setMapCenter(mapCenter.lat, mapCenter.lng, 3)
-  )
-    // setMapCenter
-    // coronaGlobalData = data;
-};
+  .then((data) => {
+    setMapCenter(data.countryInfo.lat, data.countryInfo.long, 3);
+    setStatsData(data);
+  });
+}
 
 const getWorldCoronaData = () => {
   fetch("https://disease.sh/v2/all")
@@ -119,7 +119,8 @@ const getWorldCoronaData = () => {
       buildPieChart(data);
       //if you dont use pie chart need to comment out as it would not go to next
       setStatsData(data);
-    });
+      setMapCenter(mapCenter.lat, mapCenter.lng, 2);
+    })
 };
 
 const setStatsData = (data) => {
@@ -146,7 +147,7 @@ const getHistoricalData = () => {
     .then((data) => {
       let chartData = buildChartData(data);
       buildChart(chartData);
-      sortTable(data);
+      // sortTable(data);
     });
 };
 

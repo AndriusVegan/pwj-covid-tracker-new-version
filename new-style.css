@@ -188,6 +188,8 @@ thead{
   top: 0;
   left: 0;
   right: 0;
+  opacity: 0;
+  transition: ease-in-out;
 }
 .cases .tab-selection{
   background-color: #cc1034;
@@ -204,8 +206,10 @@ thead{
   border-top-width: 7px;
   border-radius: 12px;
 } */
-
-
+.card:hover > .tab-selection{
+  display: block;
+  opacity: 1;
+}
 
 
 @media screen and (max-width: 1280px) {
@@ -213,4 +217,13 @@ thead{
       flex-direction: column;
   }
 }
+
+@media (min-width: 1280px) {
+  .side-panel-container {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+  }
+}
+
+@madia ()
 

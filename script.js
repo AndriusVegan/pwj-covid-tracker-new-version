@@ -42,13 +42,21 @@ function initMap() {
 const changeDataSelection = (casesType) => {
   clearTheMap();
   showDataOnMap(coronaGlobalData, casesType);
+  setActiveTab(elem);
 };
 
 const clearTheMap = () => {
   for (let circle of mapCircles) {
     circle.setMap(null);
+
   }
 };
+
+const setActiveTab = (elem) =>{
+  const activeEL = document.querySelector('.acrd.active');
+  activeEL.classList.remove('active')
+  elem.classList.add('active')
+}
 
 const setMapCenter = (lat, long, zoom) => {
   map.setZoom(zoom);

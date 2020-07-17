@@ -1,7 +1,9 @@
 window.onload = () => {
-  getCountryData();
+  getCountriesData();
   getHistoricalData();
   getWorldCoronaData();
+  // $('.ui.dropdown').dropdown();
+
 
   // document.querySelector(".active-cases-card").addEventListener("click", () => {
   //   console.log("yo we clicked");
@@ -13,53 +15,138 @@ var map;
 var infoWindow;
 let coronaGlobalData;
 let mapCircles = [];
+const worldwideSelection = {
+  name: 'Worldwide',
+  value: 'www',
+  selected: true
+}
 var casesTypeColor = {
   cases: "#1d2c4d",
   active: "#9d80fe",
   recovered: "#7dd71d",
   deaths: "#fb4443",
 };
+const mapCenter = {
+  lat: 34.80746,
+  lng: -40.4796
+}
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: 53.345, lng: 23.065 },
+    center: mapCenter,
     zoom: 3,
     styles: mapStyle,
   });
   infoWindow = new google.maps.InfoWindow();
 }
+
 const changeDataSelection = (casesType) => {
   clearTheMap();
   showDataOnMap(coronaGlobalData, casesType);
+  setActiveTab(elem);
 };
 
 const clearTheMap = () => {
   for (let circle of mapCircles) {
     circle.setMap(null);
+
   }
 };
 
-const getCountryData = () => {
+const setActiveTab = (elem) =>{
+  const activeEL = document.querySelector('.acrd.active');
+  activeEL.classList.remove('active')
+  elem.classList.add('active')
+}
+
+const setMapCenter = (lat, long, zoom) => {
+  map.setZoom(zoom);
+  map.panTo({
+    lat: lat,
+    lng: long
+  })
+}
+
+
+const initDropdown = (searchList) => {
+  $('.ui.dropdown').dropdown({
+    values: searchList,
+    onChange: function(value, text) {
+      if(value !== worldwideSelection.value){
+        getCountryData(value);
+      } else {
+        getWorldCoronaData();
+      }
+    }
+  });
+}
+
+const setSearchList = (data) => {
+  let searchList = [];
+  searchList.push(worldwideSelection);
+  data.forEach((countryData) => {
+    searchList.push({
+      name: countryData.country,
+      value: countryData.countryInfo.iso3
+    })
+  })
+  initDropdown(searchList);
+}
+
+const getCountriesData = () => {
   fetch("https://disease.sh/v2/countries")
     .then((response) => {
       return response.json()
     })
     .then((data) => {
       coronaGlobalData = data;
+      setSearchList(data);
       showDataOnMap(data);
       showDataInTable(data);
     });
 };
+
+const getCountryData = (countryIso) =>{
+  const url = "https://disease.sh/v3/covid-19/countries/" + countryIso;
+  fetch(url)
+  .then((response) => {
+    return response.json()
+  })
+  .then((data) => {
+    setMapCenter(data.countryInfo.lat, data.countryInfo.long, 3);
+    setStatsData(data);
+  });
+}
 
 const getWorldCoronaData = () => {
   fetch("https://disease.sh/v2/all")
     .then((response) => {
       return response.json();
     })
-    .then((data) => {
+    .then((data)=>{
       // let chartData = buildChartData(data);
       buildPieChart(data);
-    });
+      //if you dont use pie chart need to comment out as it would not go to next
+      setStatsData(data);
+      setMapCenter(mapCenter.lat, mapCenter.lng, 2);
+    })
 };
+
+const setStatsData = (data) => {
+  let addedCases = numeral(data.todayCases).format('+00');
+  let addedRecovered = numeral(data.todayRecovered).format('+00');
+  let addedDeaths = numeral(data.todayDeaths).format('+00');
+  let totalCases = numeral(data.cases).format('0.0a');
+  let totalRecovered = numeral(data.recovered).format('0.0a');
+  let totalDeaths = numeral(data.deaths).format('0.0a');
+
+  document.querySelector('.total-number').innerHTML=addedCases;
+  document.querySelector('.recovered-number').innerHTML=addedRecovered;
+  document.querySelector('.deaths-number').innerHTML=addedDeaths;
+  document.querySelector('.cases-total').innerHTML=`${totalCases} Total`;
+  document.querySelector('.recovered-total').innerHTML=`${totalRecovered} Total`;
+  document.querySelector('.deaths-total').innerHTML=`${totalDeaths} Total`;
+}
+
 const getHistoricalData = () => {
   fetch("https://disease.sh/v2/historical/all?lastdays=120")
     .then((response) => {
@@ -68,10 +155,9 @@ const getHistoricalData = () => {
     .then((data) => {
       let chartData = buildChartData(data);
       buildChart(chartData);
+      // sortTable(data);
     });
 };
-
-
 
 const openInfoWindow = () => {
   infoWindow.open(map);
@@ -140,11 +226,46 @@ const showDataInTable = (data) => {
     html += `
       <tr>
           <td>${country.country}</td>
-          <td>${country.cases}</td>
-          <td>${country.recovered}</td>
-          <td>${country.deaths}</td>
+          <td>${numeral(country.cases).format('0,0')}</td>
+          <td>${numeral(country.recovered).format('0.0')}</td>
+          <td>${numeral(country.deaths).format('0.0a')}</td>
       </tr>
       `;
   });
   document.getElementById("table-data").innerHTML = html;
 };
+
+// const sortTable = () => {
+//   var table, rows, switching, i, x, y, shouldSwitch;
+//   table = document.getElementById("table-data");
+//   switching = true;
+//   /* Make a loop that will continue until
+//   no switching has been done: */
+//   while (switching) {
+//     // Start by saying: no switching is done:
+//     switching = false;
+//     rows = table.rows;
+//     /* Loop through all table rows (except the
+//     first, which contains table headers): */
+//     for (i = 1; i < (rows.length - 1); i++) {
+//       // Start by saying there should be no switching:
+//       shouldSwitch = false;
+//       /* Get the two elements you want to compare,
+//       one from current row and one from the next: */
+//       x = rows[i].getElementsByTagName("TD")[0];
+//       y = rows[i + 1].getElementsByTagName("TD")[0];
+//       // Check if the two rows should switch place:
+//       if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+//         // If so, mark as a switch and break the loop:
+//         shouldSwitch = true;
+//         break;
+//       }
+//     }
+//     if (shouldSwitch) {
+//       /* If a switch has been marked, make the switch
+//       and mark that a switch has been done: */
+//       rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+//       switching = true;
+//     }
+//   }
+// }

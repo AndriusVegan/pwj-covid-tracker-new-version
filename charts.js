@@ -1,11 +1,16 @@
 const buildChartData = (data) => {
     let chartData = [];
+    let lastDataPoint;
     for (let date in data.cases) {
-      let newDataPoint = {
-        x: date,
-        y: data.cases[date],
-      };
-      chartData.push(newDataPoint);
+      if(lastDataPoint){
+        let newDataPoint = {
+          x: date,
+          y: data.cases[date] - lastDataPoint,
+        };
+        chartData.push(newDataPoint);
+      }
+     
+      lastDataPoint = data[casesType][date];
     }
     return chartData;
   };
@@ -23,8 +28,8 @@ const buildChartData = (data) => {
         datasets: [
           {
             label: "Total Cases",
-            backgroundColor: "#1d2c4d",
-            borderColor: "#1d2c4d",
+            backgroundColor: "rgba(204, 16, 52, 0.5)",
+            borderColor: "#cc1034",
             data: chartData,
           },
         ],
@@ -38,8 +43,10 @@ const buildChartData = (data) => {
           intersect: false,
         },
         scales: {
-          xAxes: [
-            {
+          xAxes: [{
+            gridLines: {
+              display:false
+            },
               type: "time",
               time: {
                 format: timeFormat,
@@ -53,7 +60,7 @@ const buildChartData = (data) => {
               ticks: {
                 // Include a dollar sign in the ticks
                 callback: function (value, index, values) {
-                  return numeral(value).format("0,0");
+                  return numeral(value).format("0a");
                 },
               },
             },

@@ -1,0 +1,6 @@
+@media (max-width: 1199.98px) {
+  .side-panel-container {
+    border-top-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+  }
+}

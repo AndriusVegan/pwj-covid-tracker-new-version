@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/dropdown.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/transition.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="new-style.css">
   <link rel="stylesheet" href="mobile.css">
@@ -94,8 +95,12 @@
           <!-- <div class="col linear-chart mr-3 p-3">
             <canvas id="myChart"></canvas>
           </div> -->
-          <div class="col pie-chart-container p-3">
+          <!-- <div class="col pie-chart-container p-3">
             <canvas id="myPieChart"></canvas>
+          </div> -->
+          <div class="col mr-3 py-3 twitter-feed">
+            <a class="twitter-timeline" data-theme="dark" href="https://twitter.com/WHO?ref_src=twsrc%5Etfw">Tweets by WHO</a> 
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
           </div>
         </div>
       </div>
@@ -103,11 +108,12 @@
         <div class="cases-table-container">
           <h4>Data by Country</h4>
           <div class="country-data">
-            <table class="table table-striped table-light">
+            <table class="table sticky table-striped table-light mydatatable">
               <thead>
                 <tr>
                   <th scope="col">Country Name</th>
-                  <th scope="col">Cases</th>
+                  <th scope="col"></th>
+                  <th scope="col">Total cases</th>
                   <th scope="col">Recovered</th>
                   <th scope="col">Deaths</th>
                 </tr>
@@ -122,38 +128,6 @@
           <div class="linear-chart p-3">
             <canvas id="myChart"></canvas>
           </div>
-          <!-- <div class="country-data">
-            <table class="table table-striped table-light">
-              <thead>
-                <tr>
-                  <th scope="col">Country Name</th>
-                  <th scope="col">Cases</th>
-                  <th scope="col">Recovered</th>
-                  <th scope="col">Deaths</th>
-                </tr>
-              </thead>
-              <tbody id="table-data">
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-              </tbody>
-            </table>
-          </div> -->
         </div>
       </div>
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDv7yxdmRtvnN7DhA0dVKr1-qugIwGuaQA&callback=initMap" async defer></script>
@@ -162,8 +136,15 @@
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/dropdown.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/transition.min.js"></script>
-      <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script> -->
+      <script scr= "https://code.jquery.com/jquery-3.3.1.min.js"></script>
+      <script scr= "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7umd/popper.min.js"></script>
+      <script scr= "https://stackpath.boostrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+      <script>src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js" </script>
+      <script>src="https://cdn.datatables.net/1.10.21/js/dataTables.boostrap4.min.js" </script>
+
+      <Script>
+        $('.mydatatabe').DataTable();
+      </Script>
 </body>
 
 </html>

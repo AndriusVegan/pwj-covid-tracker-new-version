@@ -120,22 +120,29 @@ body {
 .death-number {
   color: #b95a5a;
 }
-/* .card:hover {
+.card:hover {
   background-color: #caccc3;
   cursor: pointer;
-} */
+}
 .table {
   width: 100%;
   border-radius: 12px;
   border-spacing: 0px;
 }
+
 .country-data {
   width: 100%;
   border-spacing: 0px;
   margin-top: 20px;
   /* border-radius: 10px; */
-  overflow: scroll;
+  overflow-y: scroll;
   height: 400px;
+  position: relative;
+}
+th{
+  background-color: gray;
+  position: sticky;
+  top: 0;
 }
 
 .info-flag {
@@ -167,12 +174,7 @@ tr:hover {
   background-color: #898d78;
   transition: ease-in-out 0.5s;
 }
-/* table{
-  position: relative;
-}
-thead{
-  position: sticky;
-} */
+
 .card {
   overflow: hidden;
   cursor: pointer;
@@ -209,6 +211,13 @@ thead{
   border-radius: 12px;
 } */
 
+.twitter-feed{
+  min-height: 300px;
+  border-radius: 12px;
+  width: 100%;
+  
+}
+
 @media screen and (max-width: 1280px) {
   #main-row {
     flex-direction: column;
@@ -221,5 +230,3 @@ thead{
     border-bottom-right-radius: 12px;
   }
 }
-
-@madia();

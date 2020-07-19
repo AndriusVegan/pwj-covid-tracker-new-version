@@ -106,8 +106,12 @@ body {
   border-top-left-radius: 30px;
   background-color: white;
   box-shadow: 0 0 8px -4px rgba(0 0 0 0.5);
-  padding-top: 15px;
+  padding-top: 5px;
 }
+.cases-table-container > h4 {
+  text-align: center;
+}
+
 .total-number {
   color: #cc1034;
 }
@@ -166,7 +170,7 @@ th{
 
 .case-table-container h4,
 .chart-container h4 {
-  color: #6a5d5d;
+  color: black;
   font-weight: 400;
   text-align: center;
 }

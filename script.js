@@ -121,7 +121,7 @@ const getWorldCoronaData = () => {
     })
     .then((data) => {
       // let chartData = buildChartData(data);
-      buildPieChart(data);
+      // buildPieChart(data);
       //if you don't use pie chart need to comment out as it would not go to next
       setStatsData(data);
       setMapCenter(mapCenter.lat, mapCenter.lng, 2);
@@ -224,7 +224,8 @@ const showDataInTable = (data) => {
   data.forEach((country) => {
     html += `
       <tr>
-          <td>${country.country}</td>
+          <td>${country.country} </td>
+          <td><img src="${country.countryInfo.flag}" width="20" height="20"></td>
           <td>${numeral(country.cases).format("0,0")}</td>
           <td>${numeral(country.recovered).format("0.0")}</td>
           <td>${numeral(country.deaths).format("0.0a")}</td>

@@ -1,18 +1,35 @@
-const buildChartData = (data, casesType) => {
+// const buildChartData = (data, casesType) => {
+//   let chartData = [];
+//   let lastDataPoint;
+//   for(let date in data.cases){
+//     if(lastDataPoint){
+//       let newDataPoint = {
+//         x: date,
+//         y: data[casesType][date] - lastDataPoint
+//       }
+//       chartData.push(newDataPoint);
+//     }
+//     lastDataPoint = data[casesType][date];
+//   }
+//   return chartData;
+// };
+// nor working so put simple one below 
+
+const buildChartData = (data) => {
   let chartData = [];
   let lastDataPoint;
-  for (let date in data.cases) {
-    if (lastDataPoint) {
-      let newDataPoint = {
-        x: date,
-        y: data[casesType][date] - lastDataPoint,
-      };
-      chartData.push(newDataPoint);
-    }
-    lastDataPoint = data[casesType][date];
+  for(let date in data.cases){
+      if(lastDataPoint){
+          let newDataPoint = {
+              x: date,
+              y: data.cases[date] - lastDataPoint
+          }
+          chartData.push(newDataPoint);
+      }
+      lastDataPoint = data.cases[date];
   }
   return chartData;
-};
+}
 
 const buildChart = (chartData) => {
   console.log("All if good");
